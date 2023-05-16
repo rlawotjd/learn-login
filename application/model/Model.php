@@ -5,14 +5,14 @@ use PDO;
 use Exception;
 
 class Model{
-    protected $conn;
+    public $conn;
 
     public function __construct()
     {
         $dns="mysql:host="._DB_HOST.";dbname="._DB_NAME.";charset="._DB_CHARSET;
         $option = 
         [
-            PDO::ATTR_EMULATE_PREPARES      =>false
+            PDO::ATTR_EMULATE_PREPARES      =>true
             ,PDO::ATTR_ERRMODE              =>PDO::ERRMODE_EXCEPTION
             ,PDO::ATTR_DEFAULT_FETCH_MODE   =>PDO::FETCH_ASSOC
         ];
@@ -24,8 +24,24 @@ class Model{
         }
     }
         //DB conn 종료
-        protected function closeConn()
+        public function close()
         {
             $this->conn = null;
         }
+        //transaction start
+        public function beginTransaction()
+        {
+            $this->conn->beginTransaction();
+        }
+        //commit
+        public function commit()
+        {
+            $this->conn->commit();
+        }
+        //rollback
+        public function rollback()
+        {
+            $this->conn->rollback();
+        }
+
 }

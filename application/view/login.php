@@ -15,6 +15,14 @@
         <label for="pw">PW</label>
         <input type="password" name="pw" id="pw">
         <button type="submit">login</button>
+        <?php
+        if (isset($this->loginFlg)) {?>
+            <a href="/user/logout">로그아웃</a>
+        <?php ;}
+        else {?>
+            <a href="/user/regis">회원가입</a>
+        <?php ;}
+        ?>
     </form>
 </body>
 </html>
