@@ -48,6 +48,10 @@ class UserController extends Controller
         if (mb_strlen($arrPost["id"])>12||mb_strlen($arrPost["id"])===0) {
             $arrChkErr["id"]="ID는 12글자 이하로 입력해주세요";
         }
+        $patten="/[^a-zA-Z0-9]/"; //영어숫자대문자 아닌걸 찾아라
+        if (preg_match($patten,$arrPost["id"])!==0) {
+            $arrChkErr["id"]="ID는 영어대소문자,숫자로 입력해주세요";
+        }
         if (mb_strlen($arrPost["pw"])>20||mb_strlen($arrPost["pw"])<8) {
             $arrChkErr["pw"]="PW는 8글자 이상 20글자 이하로 입력해주세요";
         }
